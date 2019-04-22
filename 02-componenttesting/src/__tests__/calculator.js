@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calculator from '../calculator';
-import { shallow, configure } from 'enzyme';
+import { shallow } from 'enzyme';
 
 
 it('renders without crashing', () => {
@@ -21,7 +21,7 @@ it('renders TemperatureInput components', () => {
   expect(temperatureWrapper).toHaveLength(2);
 });
 
-it('renders BoilingVerdict components', () => {
+it('renders BoilingVerdict component', () => {
   // arrange
   const wrapper = shallow(<Calculator/>);
 
@@ -30,5 +30,42 @@ it('renders BoilingVerdict components', () => {
 
   // assert
   expect(boilingVerdictWrapper).toHaveLength(1);
+});
+
+it('execute onTemperatureChange on celsius', () => {
+  // arrange
+  const wrapper = shallow(<Calculator/>);
+
+  // act
+  let celsiusWrapper = wrapper.find({scale: 'c'});
+  celsiusWrapper.prop('onTemperatureChange')(50);
+  wrapper.update();
+  celsiusWrapper = wrapper.find({scale: 'c'});
+  const farenheitWrapper = wrapper.find({scale: 'f'});
+  const boilingVerdict = wrapper.find("BoilingVerdict");
+  
+  //assert
+  expect(celsiusWrapper.prop('temperature')).toBe(50);
+  expect(boilingVerdict.prop('celsius')).toEqual(50);
+  expect(farenheitWrapper.prop('temperature')).toBe("122");
+});
+
+
+it('execute onTemperatureChange on farenheit', () => {
+  // arrange
+  const wrapper = shallow(<Calculator/>);
+
+  // act
+  let farenheitWrapper = wrapper.find({scale: 'f'});
+  farenheitWrapper.prop('onTemperatureChange')(65);
+  wrapper.update();
+  farenheitWrapper = wrapper.find({scale: 'f'});
+  const celsiusWrapper = wrapper.find({scale: 'c'});
+  const boilingVerdict = wrapper.find("BoilingVerdict");
+  
+  //assert
+  expect(farenheitWrapper.prop('temperature')).toBe(65);
+  expect(boilingVerdict.prop('celsius')).toEqual("18.333");
+  expect(celsiusWrapper.prop('temperature')).toBe("18.333");
 });
 

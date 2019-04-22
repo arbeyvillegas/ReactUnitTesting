@@ -30,7 +30,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/*", "!src/index.js"
+      "src/*", "!src/index.js", "!src/setupTests.js"
     ]
   }
 }
