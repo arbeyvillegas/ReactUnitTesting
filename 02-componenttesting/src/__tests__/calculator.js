@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import Calculator from '../calculator';
 import { shallow } from 'enzyme';
 
+let wrapper;
+beforeEach(() => {
+   wrapper = shallow(<Calculator />);
+});
+
+afterEach(() => {
+    if (wrapper)
+      wrapper.unmount();
+  }
+);
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -12,8 +22,6 @@ it('renders without crashing', () => {
 
 it('renders TemperatureInput components', () => {
   // arrange
-  const wrapper = shallow(<Calculator/>);
-
   // act
   const temperatureWrapper = wrapper.find('TemperatureInput');
 
@@ -23,8 +31,6 @@ it('renders TemperatureInput components', () => {
 
 it('renders BoilingVerdict component', () => {
   // arrange
-  const wrapper = shallow(<Calculator/>);
-
   // act
   const boilingVerdictWrapper = wrapper.find('BoilingVerdict');
 
@@ -34,8 +40,6 @@ it('renders BoilingVerdict component', () => {
 
 it('execute onTemperatureChange on celsius', () => {
   // arrange
-  const wrapper = shallow(<Calculator/>);
-
   // act
   let celsiusWrapper = wrapper.find({scale: 'c'});
   celsiusWrapper.prop('onTemperatureChange')(50);
@@ -53,8 +57,6 @@ it('execute onTemperatureChange on celsius', () => {
 
 it('execute onTemperatureChange on farenheit', () => {
   // arrange
-  const wrapper = shallow(<Calculator/>);
-
   // act
   let farenheitWrapper = wrapper.find({scale: 'f'});
   farenheitWrapper.prop('onTemperatureChange')(65);
