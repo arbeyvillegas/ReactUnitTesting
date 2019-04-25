@@ -26,11 +26,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "enzyme": "^3.9.0"
+    "enzyme": "^3.9.0",
+    "enzyme-to-json": "^3.3.5"
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/*", "!src/index.js", "!src/setupTests.js"
+      "src/*",
+      "!src/index.js",
+      "!src/setupTests.js"
     ]
   }
 }

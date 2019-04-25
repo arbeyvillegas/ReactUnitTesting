@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when celsius is 50 the water would not boil 1`] = `
+<p>
+  The water would not boil.
+</p>
+`;
+
+exports[`when celsius is 120 the water would boil 1`] = `
+<p>
+  The water would boil.
+</p>
+`;
